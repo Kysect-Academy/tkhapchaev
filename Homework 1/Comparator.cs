@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Homework1
 {
     class Comparator
     {
-        public static string CompareFiles(string filePath1, string filePath2)
+        public string CompareFiles(string filePath1, string filePath2)
         {
             string[] firstFileLines = File.ReadAllLines(filePath1);
             string[] secondFileLines = File.ReadAllLines(filePath2);
