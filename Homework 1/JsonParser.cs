@@ -1,13 +1,13 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 
 namespace Homework1
 {
     class JsonParser
     {
-        private static IConfigurationRoot _configuration;
+        private IConfigurationRoot _configuration;
 
-        public static string GetPath()
+        public string GetPath()
         {
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -16,7 +16,7 @@ namespace Homework1
             return _configuration["Working directory:Path"];
         }
 
-        public static string GetResultingFileName()
+        public string GetResultingFileName()
         {
             return _configuration["Resulting file:Name"];
         }
