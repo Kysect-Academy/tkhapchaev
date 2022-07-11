@@ -38,10 +38,9 @@ public class Executor
             return 0;
         }
 
-        catch (Exception e)
+        catch (Exception failure)
         {
-            if (e is UnauthorizedAccessException ||
-                e is SecurityException)
+            if (failure is UnauthorizedAccessException || failure is SecurityException)
             {
                 return -2;
             }
