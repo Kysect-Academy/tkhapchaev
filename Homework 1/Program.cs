@@ -1,11 +1,13 @@
-namespace Homework1
+namespace Homework1;
+
+internal class Program
 {
-    internal class Program
+    public static void Main()
     {
-        public static void Main()
-        {
-            Executor executor = new Executor();
-            executor.Compare();
-        }
+        Executor executor = new Executor();
+        ExceptionHandler handler = new ExceptionHandler();
+        
+        var returnCode = executor.Compare();
+        handler.Handle(returnCode);
     }
 }
