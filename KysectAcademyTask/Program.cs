@@ -1,2 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿namespace KysectAcademyTask;
+
+internal class Program
+{
+    public static void Main()
+    {
+        var executor = new Executor();
+        var handler = new ExceptionHandler();
+
+        int returnCode = executor.Compare();
+        handler.Handle(returnCode);
+    }
+}
