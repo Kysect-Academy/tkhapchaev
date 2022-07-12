@@ -5,9 +5,15 @@ internal class Program
     public static void Main()
     {
         var executor = new Executor();
-        var handler = new ExceptionHandler();
 
-        int returnCode = executor.Compare();
-        handler.Handle(returnCode);
+        try
+        {
+            executor.Compare();
+        }
+        
+        catch (Exception e)
+        {
+            Console.WriteLine("Кажется, что-то пошло не так...\n" + e.Message);
+        }
     }
 }

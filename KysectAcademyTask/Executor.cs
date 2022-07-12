@@ -1,6 +1,4 @@
-﻿using System.Security;
-
-namespace KysectAcademyTask;
+﻿namespace KysectAcademyTask;
 
 public class Executor
 {
@@ -13,39 +11,25 @@ public class Executor
         return files;
     }
 
-    public int Compare()
+    public void Compare()
     {
-        try
+        string[] filesToCheck = GetFileNames();
+        string resultingFile = _parser.GetResultingFileName();
+
+        for (int i = 0; i < filesToCheck.Length; ++i)
         {
-            string[] filesToCheck = GetFileNames();
-            string resultingFile = _parser.GetResultingFileName();
-
-            for (int i = 0; i < filesToCheck.Length; ++i)
+            for (int j = i + 1; j < filesToCheck.Length; ++j)
             {
-                for (int j = i + 1; j < filesToCheck.Length; ++j)
-                {
-                    string file1 = filesToCheck[i], file2 = filesToCheck[j];
-                    string similarityPercentage = new Comparator().CompareFiles(file1, file2);
-                    string fileName1 = Path.GetFileName(file1), fileName2 = Path.GetFileName(file2);
+                string file1 = filesToCheck[i], file2 = filesToCheck[j];
+                string fileName1 = Path.GetFileName(file1), fileName2 = Path.GetFileName(file2);
+                string similarityPercentage = new Comparator().CompareFiles(file1, file2);
 
-                    File.AppendAllText(resultingFile, "Процент схожести файлов ");
-                    string result = fileName1 + " и " + fileName2 + ": " + similarityPercentage + "\n";
-                    File.AppendAllText(resultingFile, result);
-                }
+                File.AppendAllText(resultingFile, "Процент схожести файлов ");
+                string result = fileName1 + " и " + fileName2 + ": " + similarityPercentage + "\n";
+                File.AppendAllText(resultingFile, result);
             }
-
-            File.AppendAllText(resultingFile, "--- " + DateTime.Now + " ---" + "\n\n");
-            return 0;
         }
 
-        catch (Exception failure)
-        {
-            if (failure is UnauthorizedAccessException || failure is SecurityException)
-            {
-                return -2;
-            }
-
-            return -1;
-        }
+        File.AppendAllText(resultingFile, "--- " + DateTime.Now + " ---" + "\n\n");
     }
 }
