@@ -1,2 +1,19 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿namespace KysectAcademyTask;
+
+internal class Program
+{
+    public static void Main()
+    {
+        var executor = new Executor();
+
+        try
+        {
+            executor.Compare();
+        }
+        
+        catch (Exception e)
+        {
+            Console.WriteLine("Кажется, что-то пошло не так...\n" + e.Message);
+        }
+    }
+}
