@@ -2,7 +2,7 @@
 
 public class Comparator
 {
-    public int LevenshteinDistance(string firstSource, string secondSource)
+    private int LevenshteinDistance(string firstSource, string secondSource)
     {
         int firstSourceLength = firstSource.Length;
         int secondSourceLength = secondSource.Length;
