@@ -1,6 +1,6 @@
 ﻿namespace KysectAcademyTask;
 
-internal class Program
+public class Program
 {
     public static void Main()
     {
@@ -11,9 +11,9 @@ internal class Program
             executor.Compare();
         }
         
-        catch (Exception e)
+        catch (Exception exception)
         {
-            Console.WriteLine("Кажется, что-то пошло не так...\n" + e.Message);
+            Console.WriteLine("Кажется, что-то пошло не так...\n" + exception.Message);
         }
     }
 }
