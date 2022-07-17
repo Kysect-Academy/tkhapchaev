@@ -3,6 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# My .gitignore files
+KysectAcademyTask/Root directory
+KysectAcademyTask/*.json
+.idea/
+*.json
+
 # User-specific files
 *.rsuser
 *.suo
@@ -363,3 +369,4 @@ MigrationBackup/
 FodyWeavers.xsd
 .idea/.idea.KysectAcademyTask/.idea/.name
 *.xml
+*.json
