@@ -2,19 +2,20 @@
 
 public class Executor
 {
-    private JsonParser _parser = new();
+    private readonly JsonParser _parser = new();
 
-    public string[] GetFileNames()
+    private string[] GetInputDirectoryFileNames()
     {
-        string directory = _parser.GetPath();
+        string directory = _parser.GetInputDirectoryPath();
         string[] files = Directory.GetFiles(directory);
         return files;
     }
 
     public void Compare()
     {
-        string[] filesToCheck = GetFileNames();
-        string resultingFile = _parser.GetResultingFileName();
+        string[] filesToCheck = GetInputDirectoryFileNames();
+        string report = _parser.GetReportFilePath() + "\\" + _parser.GetReportFileName() + "." +
+                        _parser.GetReportFileType();
 
         for (int i = 0; i < filesToCheck.Length; ++i)
         {
@@ -24,12 +25,12 @@ public class Executor
                 string fileName1 = Path.GetFileName(file1), fileName2 = Path.GetFileName(file2);
                 string similarityPercentage = new Comparator().CompareFiles(file1, file2);
 
-                File.AppendAllText(resultingFile, "Процент схожести файлов ");
+                File.AppendAllText(report, "Процент схожести файлов ");
                 string result = fileName1 + " и " + fileName2 + ": " + similarityPercentage + "\n";
-                File.AppendAllText(resultingFile, result);
+                File.AppendAllText(report, result);
             }
         }
 
-        File.AppendAllText(resultingFile, "--- " + DateTime.Now + " ---" + "\n\n");
+        File.AppendAllText(report, "--- " + DateTime.Now + " ---" + "\n\n");
     }
 }
