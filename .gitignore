@@ -4,15 +4,10 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # My .gitignore files
-Root Directory/
-Root directory/
 RootDirectory/
-KysectAcademyTask/Root directory
-KysectAcademyTask/*.json
-.idea/.idea.KysectAcademyTask/.idea/.name
 .idea/
-*.json
 *.xml
+*.json
 
 # User-specific files
 *.rsuser
@@ -28,8 +23,8 @@ KysectAcademyTask/*.json
 mono_crash.*
 
 # Build results
+[Bb]in/
 [Dd]ebug/
-[Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
 x64/
@@ -38,7 +33,6 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
 [Oo]bj/
 [Oo]ut/
 [Ll]og/
