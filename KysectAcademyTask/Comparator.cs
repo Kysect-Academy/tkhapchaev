@@ -2,10 +2,9 @@
 
 public class Comparator
 {
-    private int LevenshteinDistance(string firstSource, string secondSource)
+    private int LevenshteinDistance(string source1, string source2)
     {
-        int firstSourceLength = firstSource.Length;
-        int secondSourceLength = secondSource.Length;
+        int firstSourceLength = source1.Length, secondSourceLength = source2.Length;
         int[,] matrix = new int[firstSourceLength + 1, secondSourceLength + 1];
 
         if (firstSourceLength == 0)
@@ -26,7 +25,7 @@ public class Comparator
         {
             for (int j = 1; j <= secondSourceLength; j++)
             {
-                int cost = (secondSource[j - 1] == firstSource[i - 1]) ? 0 : 1;
+                int cost = (source2[j - 1] == source1[i - 1]) ? 0 : 1;
                 matrix[i, j] = Math.Min(Math.Min(matrix[i - 1, j] + 1, matrix[i, j - 1] + 1),
                     matrix[i - 1, j - 1] + cost);
             }
@@ -37,11 +36,11 @@ public class Comparator
 
     public string CompareFiles(string filePath1, string filePath2)
     {
-        string firstFile = File.ReadAllText(filePath1);
-        string secondFile = File.ReadAllText(filePath2);
+        string firstFile = File.ReadAllText(filePath1), secondFile = File.ReadAllText(filePath2);
 
-        int levenshteinDistance = LevenshteinDistance(firstFile, secondFile);
-        int greaterLength = (firstFile.Length >= secondFile.Length) ? firstFile.Length : secondFile.Length;
+        int levenshteinDistance = LevenshteinDistance(firstFile, secondFile),
+            greaterLength = (firstFile.Length >= secondFile.Length) ? firstFile.Length : secondFile.Length;
+
         double result = (double) levenshteinDistance / greaterLength;
 
         return $"{Math.Round(100 - (result * 100), 2)} %";

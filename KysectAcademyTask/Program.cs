@@ -4,11 +4,11 @@ public static class Program
 {
     public static void Main()
     {
-        var executor = new Executor();
+        var analyzer = new Analyzer();
 
         try
         {
-            executor.Compare();
+            analyzer.Analyze();
         }
 
         catch (Exception exception)
