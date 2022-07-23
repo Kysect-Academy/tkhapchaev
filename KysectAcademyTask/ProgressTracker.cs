@@ -4,26 +4,26 @@ public class ProgressTracker
 {
     private readonly double _numberOfTasks;
 
-    public ProgressTracker(List<Tuple<string, string, string>> filesToCompare)
+    public ProgressTracker(List<FileInfo> filesToCompare)
     {
-        int counter = 0;
+        int iterationCounter = 0;
 
         for (int i = 0; i < filesToCompare.Count; ++i)
         {
             for (int j = i + 1; j < filesToCompare.Count; ++j)
             {
-                string authorName1 = filesToCompare[i].Item2, authorName2 = filesToCompare[j].Item2;
+                string authorName1 = filesToCompare[i].AuthorName, authorName2 = filesToCompare[j].AuthorName;
 
                 if (authorName1 == authorName2)
                 {
                     break;
                 }
 
-                ++counter;
+                ++iterationCounter;
             }
         }
 
-        _numberOfTasks = counter;
+        _numberOfTasks = iterationCounter;
     }
 
     public void Track(int tasksDone, string taskName)
