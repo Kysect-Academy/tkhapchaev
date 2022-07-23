@@ -1,8 +1,8 @@
 ﻿namespace KysectAcademyTask;
 
-public class Comparator
+public static class Comparator
 {
-    private int LevenshteinDistance(string source1, string source2)
+    private static int LevenshteinDistance(string source1, string source2)
     {
         int firstSourceLength = source1.Length, secondSourceLength = source2.Length;
         int[,] matrix = new int[firstSourceLength + 1, secondSourceLength + 1];
@@ -34,7 +34,7 @@ public class Comparator
         return matrix[firstSourceLength, secondSourceLength];
     }
 
-    public string CompareFiles(string filePath1, string filePath2)
+    public static double CompareFiles(string filePath1, string filePath2)
     {
         string firstFile = File.ReadAllText(filePath1), secondFile = File.ReadAllText(filePath2);
 
@@ -43,6 +43,6 @@ public class Comparator
 
         double result = (double) levenshteinDistance / greaterLength;
 
-        return $"{Math.Round(100 - (result * 100), 2)} %";
+        return result;
     }
 }
