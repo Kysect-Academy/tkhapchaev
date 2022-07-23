@@ -11,12 +11,9 @@ public class ExtensionWhitelist
 
     public bool Contains(string extension)
     {
-        foreach (string item in _extensions)
+        if (_extensions.Any(item => "." + item == extension))
         {
-            if ("." + item == extension)
-            {
-                return true;
-            }
+            return true;
         }
 
         return _extensions.Count == 0;
