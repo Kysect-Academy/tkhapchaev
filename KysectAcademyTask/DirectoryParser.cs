@@ -2,20 +2,6 @@ namespace KysectAcademyTask;
 
 public static class DirectoryParser
 {
-    private static List<string> Parse(string directoryPath)
-    {
-        var files = new List<string>();
-        string[] subdirectories = Directory.GetDirectories(directoryPath);
-        files.AddRange(Directory.GetFiles(directoryPath));
-
-        foreach (string subdirectory in subdirectories)
-        {
-            files.AddRange(Parse(subdirectory));
-        }
-
-        return files;
-    }
-
     public static List<List<string>> GetFormattedPaths(string inputDirectoryPath)
     {
         string inputDirectoryName = Path.GetFileName(inputDirectoryPath);
@@ -54,5 +40,19 @@ public static class DirectoryParser
         }
 
         return result;
+    }
+
+    private static List<string> Parse(string directoryPath)
+    {
+        var files = new List<string>();
+        string[] subdirectories = Directory.GetDirectories(directoryPath);
+        files.AddRange(Directory.GetFiles(directoryPath));
+
+        foreach (string subdirectory in subdirectories)
+        {
+            files.AddRange(Parse(subdirectory));
+        }
+
+        return files;
     }
 }

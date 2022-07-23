@@ -79,12 +79,11 @@ public class AuthorHandler
         foreach (List<string> path in _formattedPaths)
         {
             string authorName = path[1], taskName = path[2], file;
-            var submissionDate = new SubmissionDate();
+            var submissionDate = new SubmissionDate(path[3]);
             List<Task> tasks = tasksLinkedToAuthors[authorName];
 
             if (path.Count == pathDepthToFiles)
             {
-                submissionDate.Parse(path[3]);
                 file = path[4];
             }
 
@@ -98,7 +97,7 @@ public class AuthorHandler
             {
                 if (taskName == task.Name)
                 {
-                    task.Submissions.Add(new Tuple<SubmissionDate, string>(submissionDate, file));
+                    task.Submissions.Add(new Submission(submissionDate, file));
                 }
             }
 
