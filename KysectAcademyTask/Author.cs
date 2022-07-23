@@ -2,11 +2,11 @@ namespace KysectAcademyTask;
 
 public class Author
 {
-    public readonly string Name;
+    public string Name { get; }
 
-    public readonly string Group;
+    public string Group { get; }
 
-    public List<Task> Tasks = new List<Task>();
+    public List<Task> Tasks = new();
 
     public Author(string name, string group)
     {
