@@ -2,9 +2,9 @@ namespace KysectAcademyTask;
 
 public class Task
 {
-    public readonly string Name;
+    public string Name { get; }
 
-    public readonly List<Tuple<SubmissionDate, string>> Submissions = new List<Tuple<SubmissionDate, string>>();
+    public readonly List<Submission> Submissions = new();
 
     public Task(string name)
     {
