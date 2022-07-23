@@ -6,13 +6,9 @@ public class PathFilter
 
     public List<List<string>> Filter(List<List<string>> formattedPaths)
     {
-        var result = new List<List<string>>();
         const int pathDepthToFiles = 5;
 
-        foreach (List<string> formattedPath in formattedPaths)
-        {
-            result.Add(formattedPath);
-        }
+        var result = formattedPaths.ToList();
 
         var authorWhitelist = new AuthorWhitelist(_configurationParser.GetAuthorWhitelist());
         var authorBlacklist = new AuthorBlacklist(_configurationParser.GetAuthorBlacklist());
