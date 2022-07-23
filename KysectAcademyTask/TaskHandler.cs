@@ -13,9 +13,9 @@ public class TaskHandler
     {
         var tasks = new HashSet<string>();
 
-        foreach (List<string> formattedPath in _formattedPaths)
+        foreach (string currentTaskName in _formattedPaths.Select(formattedPath => formattedPath[2]))
         {
-            tasks.Add(formattedPath[2]);
+            tasks.Add(currentTaskName);
         }
 
         return tasks.ToList();
@@ -27,9 +27,11 @@ public class TaskHandler
 
         foreach (List<string> formattedPath in _formattedPaths)
         {
-            if (group == formattedPath[0])
+            string currentTaskName = formattedPath[2], currentGroupName = formattedPath[0];
+
+            if (group == currentGroupName)
             {
-                tasks.Add(formattedPath[2]);
+                tasks.Add(currentTaskName);
             }
         }
 
