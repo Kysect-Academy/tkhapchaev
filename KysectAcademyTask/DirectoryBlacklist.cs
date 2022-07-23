@@ -11,14 +11,6 @@ public class DirectoryBlacklist
 
     public bool Contains(string directory)
     {
-        foreach (string item in _directories)
-        {
-            if (item == directory)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return _directories.Any(item => item == directory);
     }
 }
