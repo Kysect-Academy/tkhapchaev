@@ -11,14 +11,6 @@ public class AuthorBlacklist
 
     public bool Contains(string author)
     {
-        foreach (string item in _authors)
-        {
-            if (item == author)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return _authors.Any(item => item == author);
     }
 }

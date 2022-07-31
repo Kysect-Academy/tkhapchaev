@@ -2,7 +2,7 @@
 
 namespace KysectAcademyTask;
 
-public class JsonConfigurationParser
+public class ConfigurationParser
 {
     private readonly IConfigurationRoot _configuration = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -11,34 +11,30 @@ public class JsonConfigurationParser
 
     public string GetInputDirectoryPath()
     {
-        return _configuration["Input directory path"] ?? throw new ArgumentNullException();
+        return _configuration.GetSection("Input directory path").Value ?? throw new ArgumentException();
     }
 
-    public bool GetConsoleOutputStatus()
+    public IComparator GetComparisonAlgorithm()
     {
-        bool result = _configuration.GetSection("Report:Console output:Status").Get<bool>();
-        return result;
+        return (_configuration.GetSection("Comparison algorithm").Value ?? throw new ArgumentException()) switch
+        {
+            "Levenshtein distance" => new LevenshteinDistance(),
+            _ => throw new ArgumentException()
+        };
     }
 
-    public bool GetFileOutputStatus()
+    public IWriter GetReportType()
     {
-        bool result = _configuration.GetSection("Report:File output:Status").Get<bool>();
-        return result;
-    }
+        string reportFilePath = _configuration.GetSection("Report:Path").Value ?? throw new ArgumentException(),
+            reportFileName = _configuration.GetSection("Report:Name").Value ?? throw new ArgumentException();
 
-    public string GetReportFilePath()
-    {
-        return _configuration["Report:File output:Path"] ?? throw new ArgumentNullException();
-    }
-
-    public string GetReportFileName()
-    {
-        return _configuration["Report:File output:Name"] ?? throw new ArgumentNullException();
-    }
-
-    public string GetReportFileType()
-    {
-        return _configuration["Report:File output:Type"] ?? throw new ArgumentNullException();
+        return (_configuration.GetSection("Report:Type").Value ?? throw new ArgumentException()) switch
+        {
+            "CMD" => new ConsoleWriter(),
+            "TXT" => new TextFileWriter(reportFilePath, reportFileName),
+            "JSON" => new JsonWriter(reportFilePath, reportFileName),
+            _ => throw new ArgumentException()
+        };
     }
 
     public List<string> GetExtensionWhitelist()

@@ -11,12 +11,9 @@ public class AuthorWhitelist
 
     public bool Contains(string author)
     {
-        foreach (string item in _authors)
+        if (_authors.Any(item => item == author))
         {
-            if (item == author)
-            {
-                return true;
-            }
+            return true;
         }
 
         return _authors.Count == 0;

@@ -2,33 +2,45 @@ namespace KysectAcademyTask;
 
 public class ProgressTracker
 {
-    private readonly double _numberOfTasks;
+    private readonly int _numberOfIterations;
 
-    public ProgressTracker(List<FileInfo> filesToCompare)
+    public ProgressTracker(IReadOnlyCollection<Submission> submissions, IEnumerable<string> assignments)
     {
         int iterationCounter = 0;
 
-        for (int i = 0; i < filesToCompare.Count; ++i)
+        foreach (List<Submission> submissionsToCompare in assignments.Select(assignment =>
+                     submissions.Where(submission => submission.Assignment == assignment).ToList()))
         {
-            for (int j = i + 1; j < filesToCompare.Count; ++j)
+            for (int i = 0; i < submissionsToCompare.Count; ++i)
             {
-                string authorName1 = filesToCompare[i].AuthorName, authorName2 = filesToCompare[j].AuthorName;
-
-                if (authorName1 == authorName2)
+                for (int j = i + 1; j < submissionsToCompare.Count; ++j)
                 {
-                    break;
-                }
+                    string author1 = submissionsToCompare[i].Author,
+                        author2 = submissionsToCompare[j].Author,
+                        assignment1 = submissionsToCompare[i].Assignment,
+                        assignment2 = submissionsToCompare[j].Assignment,
+                        path1 = submissionsToCompare[i].File,
+                        path2 = submissionsToCompare[j].File,
+                        file1 = Path.GetFileName(path1),
+                        file2 = Path.GetFileName(path2),
+                        extension1 = Path.GetExtension(file1),
+                        extension2 = Path.GetExtension(file2);
 
-                ++iterationCounter;
+                    if (author1 == author2 || extension1 != extension2 || assignment1 != assignment2)
+                    {
+                        break;
+                    }
+
+                    ++iterationCounter;
+                }
             }
         }
 
-        _numberOfTasks = iterationCounter;
+        _numberOfIterations = iterationCounter;
     }
 
-    public void Track(int tasksDone, string taskName)
+    public int Track(int iterationsCompleted)
     {
-        double progress = Math.Round((tasksDone / _numberOfTasks * 100), 1);
-        Console.Write($"Анализ работ \"{taskName}\": {tasksDone} из {_numberOfTasks} ({progress} %)\n");
+        return Convert.ToInt32((double) iterationsCompleted / _numberOfIterations * 100);
     }
 }

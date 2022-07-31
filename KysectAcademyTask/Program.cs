@@ -6,15 +6,14 @@ public static class Program
     {
         try
         {
-            var jsonConfigurationParser = new JsonConfigurationParser();
+            var configuration = new ConfigurationParser();
 
-            var analyzer = new Analyzer(jsonConfigurationParser.GetInputDirectoryPath(),
-                jsonConfigurationParser.GetReportFilePath(), jsonConfigurationParser.GetReportFileName(),
-                jsonConfigurationParser.GetReportFileType(),
-                jsonConfigurationParser.GetConsoleOutputStatus(), jsonConfigurationParser.GetFileOutputStatus());
+            var executor = new Executor(configuration.GetInputDirectoryPath(), configuration.GetComparisonAlgorithm(),
+                configuration.GetReportType(), configuration.GetExtensionWhitelist(),
+                configuration.GetDirectoryBlacklist(), configuration.GetAuthorWhitelist(),
+                configuration.GetAuthorBlacklist());
 
-
-            analyzer.Analyze();
+            executor.Analyze();
         }
 
         catch (Exception exception)
