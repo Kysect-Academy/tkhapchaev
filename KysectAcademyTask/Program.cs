@@ -4,11 +4,16 @@ public static class Program
 {
     public static void Main()
     {
-        var executor = new Executor();
-
         try
         {
-            executor.Compare();
+            var configuration = new ConfigurationParser();
+
+            var executor = new Executor(configuration.GetInputDirectoryPath(), configuration.GetComparisonAlgorithm(),
+                configuration.GetReportType(), configuration.GetExtensionWhitelist(),
+                configuration.GetDirectoryBlacklist(), configuration.GetAuthorWhitelist(),
+                configuration.GetAuthorBlacklist());
+
+            executor.Analyze();
         }
 
         catch (Exception exception)

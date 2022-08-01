@@ -7,7 +7,6 @@
 RootDirectory/
 .idea/
 *.xml
-*.json
 
 # User-specific files
 *.rsuser
