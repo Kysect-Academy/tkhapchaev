@@ -4,7 +4,7 @@ public class Executor
 {
     private readonly string _inputDirectoryPath;
 
-    private readonly IComparator _comparator;
+    private readonly List<IComparator> _comparator;
 
     private readonly IWriter _writer;
 
@@ -16,7 +16,8 @@ public class Executor
 
     private readonly List<string> _authorBlacklist;
 
-    public Executor(string inputDirectoryPath, IComparator comparator, IWriter writer, List<string> extensionWhitelist,
+    public Executor(string inputDirectoryPath, List<IComparator> comparator, IWriter writer,
+        List<string> extensionWhitelist,
         List<string> directoryBlacklist,
         List<string> authorWhitelist, List<string> authorBlacklist
     )
@@ -70,8 +71,11 @@ public class Executor
                         break;
                     }
 
+                    var similarityPercentages =
+                        _comparator.Select(comparator => comparator.CompareFiles(path1, path2)).ToList();
+
                     result.Add(new ComparisonResult(submissionsToCompare[i], submissionsToCompare[j],
-                        _comparator.CompareFiles(path1, path2)));
+                        similarityPercentages));
 
                     ++iterationCounter;
                     int currentProgress = progressTracker.Track(iterationCounter);

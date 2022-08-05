@@ -8,7 +8,7 @@ public static class Program
         {
             var configuration = new ConfigurationParser();
 
-            var executor = new Executor(configuration.GetInputDirectoryPath(), configuration.GetComparisonAlgorithm(),
+            var executor = new Executor(configuration.GetInputDirectoryPath(), configuration.GetComparisonAlgorithms(),
                 configuration.GetReportType(), configuration.GetExtensionWhitelist(),
                 configuration.GetDirectoryBlacklist(), configuration.GetAuthorWhitelist(),
                 configuration.GetAuthorBlacklist());
