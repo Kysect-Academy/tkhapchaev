@@ -18,7 +18,7 @@ public static class Program
 
         catch (Exception exception)
         {
-            Console.WriteLine("Кажется, что-то пошло не так...\n" + exception.Message);
+            Console.WriteLine("Кажется, что-то пошло не так..." + Environment.NewLine + exception.Message);
         }
     }
 }

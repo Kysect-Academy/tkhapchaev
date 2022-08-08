@@ -35,8 +35,8 @@ public class LevenshteinDistance : IComparator
         }
 
         int levenshteinDistance = matrix[firstFileLength, secondFileLength];
-        double result = (double) levenshteinDistance / greaterLength;
+        double result = (double)levenshteinDistance / greaterLength;
 
-        return Math.Round(100 - (result * 100), 2);
+        return Math.Round(100 - result * 100, 2);
     }
 }

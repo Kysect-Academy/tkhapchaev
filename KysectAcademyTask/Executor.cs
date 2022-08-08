@@ -80,7 +80,9 @@ public class Executor
                     ++iterationCounter;
                     int currentProgress = progressTracker.Track(iterationCounter);
 
-                    if (currentProgress % 5 == 0)
+                    const int step = 5;
+
+                    if (currentProgress % step == 0)
                     {
                         Console.WriteLine($"Текущий прогресс: {currentProgress} %");
                     }

@@ -26,7 +26,7 @@ public class DirectoryReader : IReader
         string inputDirectoryName = Path.GetFileName(inputDirectoryPath);
         IEnumerable<string> files = Parse(inputDirectoryPath, 0);
 
-        var formattedPaths = files.Select(file => file.Split(@"\")).ToList();
+        var formattedPaths = files.Select(file => file.Split(Path.DirectorySeparatorChar)).ToList();
         var result = new List<List<string>>();
 
         var inputDirectoryNamePositions = new List<int>();
@@ -42,7 +42,7 @@ public class DirectoryReader : IReader
                 }
             }
 
-            fileNames.Add(string.Join(@"\", formattedPath));
+            fileNames.Add(string.Join(Path.DirectorySeparatorChar, formattedPath));
         }
 
         for (int i = 0; i < formattedPaths.Count; ++i)
