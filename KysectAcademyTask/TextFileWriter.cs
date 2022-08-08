@@ -6,14 +6,14 @@ public class TextFileWriter : IWriter
 
     public TextFileWriter(string reportFilePath, string reportFileName)
     {
-        _path = reportFilePath + @"\" + reportFileName + ".txt";
+        _path = reportFilePath + Path.DirectorySeparatorChar + reportFileName + ".txt";
     }
 
     public void Write(List<ComparisonResult> contents)
     {
         foreach (ComparisonResult comparisonResult in contents)
         {
-            File.AppendAllText(_path, comparisonResult.Result + "\n");
+            File.AppendAllText(_path, comparisonResult.Result + Environment.NewLine);
         }
     }
 }

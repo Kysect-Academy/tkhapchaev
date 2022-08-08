@@ -8,7 +8,7 @@ public class JsonWriter : IWriter
 
     public JsonWriter(string reportFilePath, string reportFileName)
     {
-        _path = reportFilePath + @"\" + reportFileName + ".json";
+        _path = reportFilePath + Path.DirectorySeparatorChar + reportFileName + ".json";
     }
 
     public void Write(List<ComparisonResult> contents)

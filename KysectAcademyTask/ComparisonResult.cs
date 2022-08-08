@@ -8,8 +8,10 @@ public class ComparisonResult
 
     public string Result { get; }
 
-    public ComparisonResult(Submission firstSubmission, Submission secondSubmission, double similarityPercentage)
+    public ComparisonResult(Submission firstSubmission, Submission secondSubmission,
+        IEnumerable<double> similarityPercentages)
     {
+        double averagePercentage = similarityPercentages.Average();
         FirstSubmission = firstSubmission;
         SecondSubmission = secondSubmission;
 
@@ -25,6 +27,6 @@ public class ComparisonResult
 
         Result = $"Задание \"{assignment}\": сравнение {author1} ({group1}) и " +
                  $"{author2} ({group2}), файлы {file1} и {file2} " +
-                 $"соответственно. Процент схожести: {similarityPercentage} %";
+                 $"соответственно. Процент схожести: {averagePercentage} %";
     }
 }

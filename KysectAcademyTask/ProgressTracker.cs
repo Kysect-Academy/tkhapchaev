@@ -41,6 +41,6 @@ public class ProgressTracker
 
     public int Track(int iterationsCompleted)
     {
-        return Convert.ToInt32((double) iterationsCompleted / _numberOfIterations * 100);
+        return Convert.ToInt32((double)iterationsCompleted / _numberOfIterations * 100);
     }
 }

@@ -14,13 +14,22 @@ public class ConfigurationParser
         return _configuration.GetSection("Input directory path").Value ?? throw new ArgumentException();
     }
 
-    public IComparator GetComparisonAlgorithm()
+    public List<IComparator> GetComparisonAlgorithms()
     {
-        return (_configuration.GetSection("Comparison algorithm").Value ?? throw new ArgumentException()) switch
+        var result = new List<IComparator>();
+        List<string> algorithms = _configuration.GetSection("Comparison algorithms").Get<List<string>>()!;
+
+        if (algorithms is null)
         {
-            "Levenshtein distance" => new LevenshteinDistance(),
-            _ => throw new ArgumentException()
-        };
+            return result;
+        }
+
+        if (algorithms.Contains("Levenshtein distance"))
+        {
+            result.Add(new LevenshteinDistance());
+        }
+
+        return result;
     }
 
     public IWriter GetReportType()
